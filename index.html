@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Suliman - Flutter Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        .project-card {
+            background-color: #ffffff; /* White card background */
+            border-radius: 12px; /* More rounded corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Soft shadow */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        .header-bg {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6); /* Gradient header */
+        }
+        .text-gradient {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+    <div class="header-bg py-16 px-4 sm:px-6 lg:px-8 text-white rounded-b-3xl">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
+                Muhammad Suliman
+            </h1>
+            <p class="text-xl sm:text-2xl font-light opacity-90">
+                Flutter Developer | My Projects Showcase
+            </p>
+        </div>
+    </div>
+
+    <main class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <section class="mb-12">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-gradient">My Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Project Card: Self-Serve -->
+                <div class="project-card p-6 flex flex-col">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Self-Serve Restaurant App</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">
+                        Developed a restaurant app allowing users to order food items and seamlessly pay via Stripe integration or physical card reader. Features included printer connection via LAN and Bluetooth, notification system, and Sqflite for local data storage. Implemented native Android and iOS Printer SDK in Flutter.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Flutter</span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">Stripe API</span>
+                        <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">Printer SDK (Native)</span>
+                        <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium">Sqflite</span>
+                    </div>
+                </div>
+
+                <!-- Project Card: Online-Ordering Manager -->
+                <div class="project-card p-6 flex flex-col">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Online-Ordering Manager Backend</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">
+                        Engineered a backend application designed to efficiently manage incoming orders from a restaurant app. This project focused on optimizing workflow and enhancing operational efficiency for seamless order processing.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-medium">Backend Development</span>
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Order Management</span>
+                        <!-- Add more specific backend technologies if known, e.g., Node.js, Express.js, MySQL -->
+                    </div>
+                </div>
+
+                <!-- Project Card: Click me Cursive -->
+                <div class="project-card p-6 flex flex-col">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Click me Cursive Children's App</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">
+                        Developed an interactive children's app for alphabet learning with drawing features. Integrated microphone for pronunciation practice and voice-activated navigation to enhance the learning experience.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Flutter</span>
+                        <span class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-medium">Educational App</span>
+                        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full font-medium">Voice Recognition</span>
+                        <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-medium">Interactive UI</span>
+                    </div>
+                </div>
+
+                <!-- Project Card: IHealthCure -->
+                <div class="project-card p-6 flex flex-col">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">IHealthCure Healthcare App</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">
+                        A comprehensive healthcare app for appointment booking, including a rider role for blood sample collection. Supports online payments and integrates with physical health monitoring devices (blood pressure, glucose levels) for real-time vital parameter measurement.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Flutter</span>
+                        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full font-medium">Healthcare</span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">Payment Integration</span>
+                        <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">Device Integration</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Dates: August 2023 - December 2023</p>
+                </div>
+
+                <!-- Project Card: Medico App -->
+                <div class="project-card p-6 flex flex-col">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Medico App (File Manager & Admin)</h3>
+                    <p class="text-gray-600 mb-4 flex-grow">
+                        A file manager app facilitating easy uploads, downloads, and offline access to files. It also features an integrated admin panel for managing posts, polls, and notifications, providing a comprehensive content management solution.
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">File Management</span>
+                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full font-medium">Admin Panel</span>
+                        <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium">Content Management</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8 mt-12 rounded-t-3xl">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-sm">
+                Connect with me on LinkedIn:
+                <a href="https://www.linkedin.com/in/muhammad-suliman-383b5025b/" target="_blank" class="text-blue-400 hover:underline">
+                    Muhammad Suliman
+                </a>
+            </p>
+            <p class="text-sm mt-2">
+                Email: <a href="mailto:suliman.dev0@gmail.com" class="text-blue-400 hover:underline">suliman.dev0@gmail.com</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
