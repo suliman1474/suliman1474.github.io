@@ -9,107 +9,46 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Light gray background */
+            background-color: #f3f4f6;
             line-height: 1.6;
         }
-        /* Project card styling for the main list */
         .project-card {
-            background-color: #ffffff; /* White card background */
-            border-radius: 12px; /* More rounded corners */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Soft shadow */
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            display: flex; /* Use flexbox for consistent height */
+            display: flex;
             flex-direction: column;
-            cursor: pointer; /* Indicate it's clickable */
-            overflow: hidden; /* Ensures rounded corners clip content */
+            cursor: pointer;
+            overflow: hidden;
         }
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
         }
-        /* Header background gradient */
         .header-bg {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6); /* Gradient header */
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
         }
-        /* Text gradient for headings */
         .text-gradient {
             background: linear-gradient(45deg, #6366f1, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        /* Gallery item styling for the detail page */
         .gallery-item {
             position: relative;
             cursor: pointer;
-            border-radius: 12px; /* Slightly more rounded */
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Stronger initial shadow */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
         .gallery-item:hover {
-            transform: translateY(-5px) scale(1.02); /* Lift and slightly scale */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
-        .gallery-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0); /* Initial transparent overlay */
-            transition: background 0.3s ease-in-out;
-            border-radius: 12px;
-            z-index: 1; /* Ensure overlay is above image but below content */
-        }
-        .gallery-item:hover::before {
-            background: rgba(0, 0, 0, 0.1); /* Darker overlay on hover */
-        }
-
-        /* Modal styles for full-screen image view */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease-out; /* Fade in animation */
-        }
-        .modal-content {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-        }
-        .close-button {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .close-button:hover,
-        .close-button:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        /* Hidden class to toggle visibility of sections */
         .hidden {
             display: none;
         }
-
-        /* Fade-in animation for page transitions */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -117,77 +56,68 @@
         .fade-in {
             animation: fadeIn 0.5s ease-out;
         }
-
-        /* Specific styling for the detail page section */
         #project-detail-page {
-            background-color: #ffffff; /* White background for the detail page */
+            background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            padding: 2.5rem; /* More padding */
-            margin-top: 3rem; /* Spacing from header */
-            margin-bottom: 3rem; /* Spacing before footer */
+            padding: 2.5rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
         }
-        /* Gallery grid specific for the detail page */
         #detail-project-gallery {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adaptive grid columns */
-            gap: 2rem; /* Increased gap for better spacing */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
         #detail-project-gallery .gallery-item img {
             width: 100%;
-            height: 250px; /* Fixed height for consistent look */
-            object-fit: cover; /* Ensures image covers area without distortion */
-            border-radius: 12px; /* Match outer container radius */
-            display: block; /* Remove extra space below image */
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
         }
-        /* Modal styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.9);
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.3s ease-out;
-}
-
-.modal-content {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-    border-radius: 8px;
-    cursor: default; /* Remove pointer cursor from image */
-}
-
-.close-button {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: white;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1001;
-    transition: 0.3s;
-}
-
-.close-button:hover {
-    color: #bbb;
-    transform: scale(1.1);
-}
-
-/* Add animation for smoother transitions */
-@keyframes zoomIn {
-    from {transform: scale(0.9); opacity: 0;}
-    to {transform: scale(1); opacity: 1;}
-}
-
-.modal-content {
-    animation: zoomIn 0.3s ease-out;
-}
+        
+        /* Enhanced Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            cursor: default;
+            animation: zoomIn 0.3s ease-out;
+        }
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: 0.3s;
+        }
+        .close-button:hover {
+            color: #bbb;
+            transform: scale(1.1);
+        }
+        @keyframes zoomIn {
+            from {transform: scale(0.9); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
     </style>
 </head>
 <body class="antialiased text-gray-800">
@@ -294,19 +224,6 @@
         <div id="detail-project-tech" class="flex flex-wrap gap-2 text-sm mb-8"></div>
         <p id="detail-project-dates" class="text-sm text-gray-500 mb-8"></p>
 
-        <!-- Optional: Add GitHub or Live Demo buttons here -->
-        <div id="project-links" class="flex gap-4 mb-10">
-            <!-- Example for a GitHub link -->
-            <!-- <a href="YOUR_GITHUB_REPO_LINK" target="_blank" class="inline-flex items-center bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-900 transition-colors duration-200 font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.419 2.865 8.165 6.839 9.489.5.09.682-.218.682-.483 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.156-1.11-1.464-1.11-1.464-.908-.618.069-.606.069-.606 1.006.07 1.531 1.032 1.531 1.032.892 1.529 2.341 1.088 2.903.832.091-.645.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.949 0-1.091.39-1.984 1.029-2.684-.103-.253-.447-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.392 9.392 0 0112 6.8c.85.004 1.7.114 2.508.324 1.909-1.295 2.747-1.025 2.747-1.025.546 1.378.202 2.397.098 2.65.64.7 1.028 1.593 1.028 2.684 0 3.847-2.338 4.693-4.568 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.579.688.481C21.137 20.165 24 16.419 24 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
-                View on GitHub
-            </a>
-            <a href="YOUR_LIVE_DEMO_LINK" target="_blank" class="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                Live Demo
-            </a> -->
-        </div>
-
         <h3 class="text-2xl font-semibold mb-5 text-gray-800">Project Screenshots</h3>
         <div id="detail-project-gallery" class="grid gap-6">
             <!-- Images will be dynamically loaded here -->
@@ -334,7 +251,7 @@
     </div>
 
     <script>
-        // Define project data with more images for demonstration
+        // Define project data with images
         const projectsData = [
             {
                 id: 'self-serve',
@@ -342,7 +259,7 @@
                 description: 'Developed a restaurant app allowing users to order food items and seamlessly pay via Stripe integration or physical card reader. Features included printer connection via LAN and Bluetooth, notification system, and Sqflite for local data storage. Implemented native Android and iOS Printer SDK in Flutter.',
                 tech: ['Flutter', 'Stripe API', 'Printer SDK (Native)', 'Sqflite'],
                 images: [
-                    'self-serve/image1.png', // Corrected path: use forward slashes and project subfolder
+                    'self-serve/image1.png',
                     'self-serve/image2.png',
                     'self-serve/image3.png',
                     'self-serve/image4.png',
@@ -357,17 +274,16 @@
                 description: 'Engineered a backend application designed to efficiently manage incoming orders from a restaurant app. This project focused on optimizing workflow and enhancing operational efficiency for seamless order processing.',
                 tech: ['Backend Development', 'Order Management', 'Node.js', 'Express.js', 'MySQL'],
                 images: [
-                    'online-ordering/image1.png', 
-                    'online-ordering/image2.png', 
-                    'online-ordering/image3.png', 
-                    'online-ordering/image4.png', 
-                    'online-ordering/image5.png', 
-                    'online-ordering/image6.png', 
-                    'online-ordering/image7.png', 
-                    'online-ordering/image8.png', 
-                    'online-ordering/image9.png', 
-                    'online-ordering/image10.png', 
-          
+                    'online-ordering/image1.png',
+                    'online-ordering/image2.png',
+                    'online-ordering/image3.png',
+                    'online-ordering/image4.png',
+                    'online-ordering/image5.png',
+                    'online-ordering/image6.png',
+                    'online-ordering/image7.png',
+                    'online-ordering/image8.png',
+                    'online-ordering/image9.png',
+                    'online-ordering/image10.png',
                 ],
                 dates: ''
             },
@@ -413,13 +329,11 @@
         // Get page elements
         const projectListPage = document.getElementById('project-list-page');
         const projectDetailPage = document.getElementById('project-detail-page');
-
         const detailProjectTitle = document.getElementById('detail-project-title');
         const detailProjectDescription = document.getElementById('detail-project-description');
         const detailProjectTech = document.getElementById('detail-project-tech');
         const detailProjectDates = document.getElementById('detail-project-dates');
         const detailProjectGallery = document.getElementById('detail-project-gallery');
-
         const imageModal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
 
@@ -429,8 +343,8 @@
         function showProjectList() {
             projectListPage.classList.remove('hidden');
             projectDetailPage.classList.add('hidden');
-            projectDetailPage.classList.remove('fade-in'); // Remove animation class when hiding
-            window.scrollTo(0, 0); // Scroll to top when navigating back
+            projectDetailPage.classList.remove('fade-in');
+            window.scrollTo(0, 0);
         }
 
         /**
@@ -451,10 +365,9 @@
             detailProjectDates.textContent = project.dates ? `Dates: ${project.dates}` : '';
 
             // Populate technologies
-            detailProjectTech.innerHTML = ''; // Clear previous tech
+            detailProjectTech.innerHTML = '';
             project.tech.forEach(tech => {
                 const span = document.createElement('span');
-                // Dynamically assign background color based on technology for better visual variety
                 let bgColorClass = 'bg-gray-100';
                 let textColorClass = 'text-gray-700';
 
@@ -481,15 +394,13 @@
                     textColorClass = 'text-orange-700';
                 }
 
-
                 span.className = `${bgColorClass} ${textColorClass} px-3 py-1 rounded-full font-medium`;
                 span.textContent = tech;
                 detailProjectTech.appendChild(span);
             });
 
-
             // Populate gallery images
-            detailProjectGallery.innerHTML = ''; // Clear previous images
+            detailProjectGallery.innerHTML = '';
             project.images.forEach(imagePath => {
                 const imgContainer = document.createElement('div');
                 imgContainer.className = 'gallery-item';
@@ -500,82 +411,60 @@
                 img.className = 'w-full h-full object-cover rounded-md shadow-md';
                 img.setAttribute('loading', 'lazy');
 
-                // Add onerror fallback for images
                 img.onerror = function() {
                     this.onerror = null;
                     this.src = `https://placehold.co/400x300/CCCCCC/333333?text=Image+Not+Found`;
                 };
 
-                img.onclick = () => openModal(imagePath);
+                img.onclick = (e) => {
+                    e.stopPropagation();
+                    openModal(imagePath);
+                };
 
                 imgContainer.appendChild(img);
                 detailProjectGallery.appendChild(imgContainer);
             });
 
-            // Show project detail page and hide project list
+            // Show project detail page
             projectListPage.classList.add('hidden');
             projectDetailPage.classList.remove('hidden');
             projectDetailPage.classList.add('fade-in');
             window.scrollTo(0, 0);
         }
 
-// Replace your existing modal-related JavaScript with this:
+        /**
+         * Opens the modal with the clicked image.
+         * @param {string} src - The source URL of the image to display in the modal.
+         */
+        function openModal(src) {
+            modalImage.src = src;
+            modalImage.alt = "Full screen project screenshot";
+            imageModal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
 
-/**
- * Opens the modal with the clicked image.
- * @param {string} src - The source URL of the image to display in the modal.
- * @param {Event} event - The click event
- */
- function openModal(src, event) {
-    event.stopPropagation(); // Prevent event bubbling
-    modalImage.src = src;
-    modalImage.alt = "Full screen project screenshot";
-    imageModal.style.display = "flex";
-    document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
-}
+        /**
+         * Closes the image modal.
+         */
+        function closeModal() {
+            imageModal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
 
-/**
- * Closes the image modal.
- */
-function closeModal() {
-    imageModal.style.display = "none";
-    document.body.style.overflow = "auto"; // Re-enable scrolling
-}
+        // Close the modal when clicking the close button
+        document.querySelector('.close-button').addEventListener('click', closeModal);
 
-// Close the modal when clicking the close button or outside the image
-document.querySelector('.close-button').addEventListener('click', closeModal);
-imageModal.addEventListener('click', function(event) {
-    if (event.target === imageModal) {
-        closeModal();
-    }
-});
+        // Close modal when clicking outside the image
+        imageModal.addEventListener('click', function(event) {
+            if (event.target === imageModal) {
+                closeModal();
+            }
+        });
 
-// Prevent modal from closing when clicking on the image itself
-modalImage.addEventListener('click', function(event) {
-    event.stopPropagation();
-});
-
-// Update your gallery image creation code to pass the event:
-project.images.forEach(imagePath => {
-    const imgContainer = document.createElement('div');
-    imgContainer.className = 'gallery-item';
-
-    const img = document.createElement('img');
-    img.src = imagePath;
-    img.alt = `Screenshot for ${project.title}`;
-    img.className = 'w-full h-full object-cover rounded-md shadow-md';
-    img.setAttribute('loading', 'lazy');
-
-    img.onerror = function() {
-        this.onerror = null;
-        this.src = `https://placehold.co/400x300/CCCCCC/333333?text=Image+Not+Found`;
-    };
-
-    img.onclick = (e) => openModal(imagePath, e); // Pass the event here
-
-    imgContainer.appendChild(img);
-    detailProjectGallery.appendChild(imgContainer);
-});
+        // Prevent modal from closing when clicking on the image itself
+        modalImage.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
     </script>
 </body>
 </html>
