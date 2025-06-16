@@ -139,6 +139,55 @@
             border-radius: 12px; /* Match outer container radius */
             display: block; /* Remove extra space below image */
         }
+        /* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 8px;
+    cursor: default; /* Remove pointer cursor from image */
+}
+
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    transition: 0.3s;
+}
+
+.close-button:hover {
+    color: #bbb;
+    transform: scale(1.1);
+}
+
+/* Add animation for smoother transitions */
+@keyframes zoomIn {
+    from {transform: scale(0.9); opacity: 0;}
+    to {transform: scale(1); opacity: 1;}
+}
+
+.modal-content {
+    animation: zoomIn 0.3s ease-out;
+}
     </style>
 </head>
 <body class="antialiased text-gray-800">
@@ -308,9 +357,17 @@
                 description: 'Engineered a backend application designed to efficiently manage incoming orders from a restaurant app. This project focused on optimizing workflow and enhancing operational efficiency for seamless order processing.',
                 tech: ['Backend Development', 'Order Management', 'Node.js', 'Express.js', 'MySQL'],
                 images: [
-                    'online-ordering-manager/manager-1.jpg', // Example of different project folder and extension
-                    'online-ordering-manager/manager-2.png',
-                    'online-ordering-manager/manager-3.jpeg'
+                    'online-ordering/image1.png', 
+                    'online-ordering/image2.png', 
+                    'online-ordering/image3.png', 
+                    'online-ordering/image4.png', 
+                    'online-ordering/image5.png', 
+                    'online-ordering/image6.png', 
+                    'online-ordering/image7.png', 
+                    'online-ordering/image8.png', 
+                    'online-ordering/image9.png', 
+                    'online-ordering/image10.png', 
+          
                 ],
                 dates: ''
             },
@@ -462,28 +519,63 @@
             window.scrollTo(0, 0);
         }
 
-        /**
-         * Opens the modal with the clicked image.
-         * @param {string} src - The source URL of the image to display in the modal.
-         */
-        function openModal(src) {
-            modalImage.src = src;
-            imageModal.style.display = "flex";
-        }
+// Replace your existing modal-related JavaScript with this:
 
-        /**
-         * Closes the image modal.
-         */
-        function closeModal() {
-            imageModal.style.display = "none";
-        }
+/**
+ * Opens the modal with the clicked image.
+ * @param {string} src - The source URL of the image to display in the modal.
+ * @param {Event} event - The click event
+ */
+ function openModal(src, event) {
+    event.stopPropagation(); // Prevent event bubbling
+    modalImage.src = src;
+    modalImage.alt = "Full screen project screenshot";
+    imageModal.style.display = "flex";
+    document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+}
 
-        // Close the modal if clicked outside the image content
-        imageModal.addEventListener('click', function(event) {
-            if (event.target === this) {
-                closeModal();
-            }
-        });
+/**
+ * Closes the image modal.
+ */
+function closeModal() {
+    imageModal.style.display = "none";
+    document.body.style.overflow = "auto"; // Re-enable scrolling
+}
+
+// Close the modal when clicking the close button or outside the image
+document.querySelector('.close-button').addEventListener('click', closeModal);
+imageModal.addEventListener('click', function(event) {
+    if (event.target === imageModal) {
+        closeModal();
+    }
+});
+
+// Prevent modal from closing when clicking on the image itself
+modalImage.addEventListener('click', function(event) {
+    event.stopPropagation();
+});
+
+// Update your gallery image creation code to pass the event:
+project.images.forEach(imagePath => {
+    const imgContainer = document.createElement('div');
+    imgContainer.className = 'gallery-item';
+
+    const img = document.createElement('img');
+    img.src = imagePath;
+    img.alt = `Screenshot for ${project.title}`;
+    img.className = 'w-full h-full object-cover rounded-md shadow-md';
+    img.setAttribute('loading', 'lazy');
+
+    img.onerror = function() {
+        this.onerror = null;
+        this.src = `https://placehold.co/400x300/CCCCCC/333333?text=Image+Not+Found`;
+    };
+
+    img.onclick = (e) => openModal(imagePath, e); // Pass the event here
+
+    imgContainer.appendChild(img);
+    detailProjectGallery.appendChild(imgContainer);
+});
     </script>
 </body>
 </html>
