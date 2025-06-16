@@ -37,18 +37,35 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        /* Gallery item hover effect */
+        /* Gallery item styling for the detail page */
         .gallery-item {
+            position: relative;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 12px; /* Slightly more rounded */
             overflow: hidden;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* Subtle shadow for individual images */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Stronger initial shadow */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
         .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: translateY(-5px) scale(1.02); /* Lift and slightly scale */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
         }
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0); /* Initial transparent overlay */
+            transition: background 0.3s ease-in-out;
+            border-radius: 12px;
+            z-index: 1; /* Ensure overlay is above image but below content */
+        }
+        .gallery-item:hover::before {
+            background: rgba(0, 0, 0, 0.1); /* Darker overlay on hover */
+        }
+
         /* Modal styles for full-screen image view */
         .modal {
             display: none; /* Hidden by default */
@@ -111,16 +128,16 @@
             margin-bottom: 3rem; /* Spacing before footer */
         }
         /* Gallery grid specific for the detail page */
+        #detail-project-gallery {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adaptive grid columns */
+            gap: 2rem; /* Increased gap for better spacing */
+        }
         #detail-project-gallery .gallery-item img {
             width: 100%;
             height: 250px; /* Fixed height for consistent look */
             object-fit: cover; /* Ensures image covers area without distortion */
-            border-radius: 8px; /* Rounded corners for images */
-        }
-
-        /* Ensure images are responsive within their grid containers */
-        #detail-project-gallery {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adaptive grid columns */
+            border-radius: 12px; /* Match outer container radius */
+            display: block; /* Remove extra space below image */
         }
     </style>
 </head>
@@ -276,10 +293,10 @@
                 description: 'Developed a restaurant app allowing users to order food items and seamlessly pay via Stripe integration or physical card reader. Features included printer connection via LAN and Bluetooth, notification system, and Sqflite for local data storage. Implemented native Android and iOS Printer SDK in Flutter.',
                 tech: ['Flutter', 'Stripe API', 'Printer SDK (Native)', 'Sqflite'],
                 images: [
-                    'self-serve/image1.png',
+                    'self-serve/image1.png', // Corrected path: use forward slashes and project subfolder
                     'self-serve/image2.png',
-                       'self-serve/image3.png',  
-                        'self-serve/image4.png',
+                    'self-serve/image3.png',
+                    'self-serve/image4.png',
                     'self-serve/image5.png',
                     'self-serve/image6.png',
                 ],
@@ -289,11 +306,11 @@
                 id: 'online-ordering-manager',
                 title: 'Online-Ordering Manager Backend',
                 description: 'Engineered a backend application designed to efficiently manage incoming orders from a restaurant app. This project focused on optimizing workflow and enhancing operational efficiency for seamless order processing.',
-                tech: ['Backend Development', 'Order Management', 'Node.js', 'Express.js', 'MySQL'], // Added more backend tech for example
+                tech: ['Backend Development', 'Order Management', 'Node.js', 'Express.js', 'MySQL'],
                 images: [
-                    'images/manager-1.jpg',
-                    'images/manager-2.png',
-                    'images/manager-3.jpeg'
+                    'online-ordering-manager/manager-1.jpg', // Example of different project folder and extension
+                    'online-ordering-manager/manager-2.png',
+                    'online-ordering-manager/manager-3.jpeg'
                 ],
                 dates: ''
             },
@@ -303,8 +320,8 @@
                 description: 'Developed an interactive children\'s app for alphabet learning with drawing features. Integrated microphone for pronunciation practice and voice-activated navigation to enhance the learning experience.',
                 tech: ['Flutter', 'Educational App', 'Voice Recognition', 'Interactive UI'],
                 images: [
-                    'images/cursive-1.jpg',
-                    'images/cursive-2.png'
+                    'click-me-cursive/cursive-1.jpg',
+                    'click-me-cursive/cursive-2.png'
                 ],
                 dates: ''
             },
@@ -314,11 +331,11 @@
                 description: 'A comprehensive healthcare app for appointment booking, including a rider role for blood sample collection. Supports online payments and integrates with physical health monitoring devices (blood pressure, glucose levels) for real-time vital parameter measurement.',
                 tech: ['Flutter', 'Healthcare', 'Payment Integration', 'Device Integration'],
                 images: [
-                    'images/healthcure-1.jpg',
-                    'images/healthcure-2.png',
-                    'images/healthcure-3.jpeg',
-                    'images/healthcure-4.gif',
-                    'images/healthcure-5.jpg'
+                    'ihealthcure/healthcure-1.jpg',
+                    'ihealthcure/healthcure-2.png',
+                    'ihealthcure/healthcure-3.jpeg',
+                    'ihealthcure/healthcure-4.gif',
+                    'ihealthcure/healthcure-5.jpg'
                 ],
                 dates: 'August 2023 - December 2023'
             },
@@ -326,11 +343,11 @@
                 id: 'medico-app',
                 title: 'Medico App (File Manager & Admin)',
                 description: 'A file manager app facilitating easy uploads, downloads, and offline access to files. It also features an integrated admin panel for managing posts, polls, and notifications, providing a comprehensive content management solution.',
-                tech: ['File Management', 'Admin Panel', 'Content Management', 'Flutter', 'Firebase'], // Added more tech
+                tech: ['File Management', 'Admin Panel', 'Content Management', 'Flutter', 'Firebase'],
                 images: [
-                    'images/medico-1.jpg',
-                    'images/medico-2.png',
-                    'images/medico-3.jpeg'
+                    'medico-app/medico-1.jpg',
+                    'medico-app/medico-2.png',
+                    'medico-app/medico-3.jpeg'
                 ],
                 dates: ''
             }
@@ -418,22 +435,21 @@
             detailProjectGallery.innerHTML = ''; // Clear previous images
             project.images.forEach(imagePath => {
                 const imgContainer = document.createElement('div');
-                imgContainer.className = 'gallery-item'; // Removed direct shadow here, will add to img
+                imgContainer.className = 'gallery-item';
 
                 const img = document.createElement('img');
                 img.src = imagePath;
                 img.alt = `Screenshot for ${project.title}`;
-                img.className = 'w-full h-full object-cover rounded-md shadow-md'; // Apply shadow directly to img for consistency
-                img.setAttribute('loading', 'lazy'); // Lazy load images for performance
+                img.className = 'w-full h-full object-cover rounded-md shadow-md';
+                img.setAttribute('loading', 'lazy');
 
                 // Add onerror fallback for images
                 img.onerror = function() {
-                    this.onerror = null; // Prevent infinite loop if fallback also fails
-                    // Use a generic placeholder if the specific image is not found
+                    this.onerror = null;
                     this.src = `https://placehold.co/400x300/CCCCCC/333333?text=Image+Not+Found`;
                 };
 
-                img.onclick = () => openModal(imagePath); // Open modal on click
+                img.onclick = () => openModal(imagePath);
 
                 imgContainer.appendChild(img);
                 detailProjectGallery.appendChild(imgContainer);
@@ -442,8 +458,8 @@
             // Show project detail page and hide project list
             projectListPage.classList.add('hidden');
             projectDetailPage.classList.remove('hidden');
-            projectDetailPage.classList.add('fade-in'); // Add animation class
-            window.scrollTo(0, 0); // Scroll to top when navigating to detail page
+            projectDetailPage.classList.add('fade-in');
+            window.scrollTo(0, 0);
         }
 
         /**
@@ -452,7 +468,7 @@
          */
         function openModal(src) {
             modalImage.src = src;
-            imageModal.style.display = "flex"; // Use flex to center content
+            imageModal.style.display = "flex";
         }
 
         /**
