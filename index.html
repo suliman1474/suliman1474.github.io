@@ -11,6 +11,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6; /* Light gray background */
         }
+        /* Project card styling for the main list */
         .project-card {
             background-color: #ffffff; /* White card background */
             border-radius: 12px; /* More rounded corners */
@@ -18,19 +19,23 @@
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             display: flex; /* Use flexbox for consistent height */
             flex-direction: column;
+            cursor: pointer; /* Indicate it's clickable */
         }
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
         }
+        /* Header background gradient */
         .header-bg {
             background: linear-gradient(135deg, #6366f1, #8b5cf6); /* Gradient header */
         }
+        /* Text gradient for headings */
         .text-gradient {
             background: linear-gradient(45deg, #6366f1, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        /* Gallery item hover effect */
         .gallery-item {
             cursor: pointer;
             border-radius: 8px;
@@ -40,7 +45,7 @@
         .gallery-item:hover {
             transform: scale(1.03);
         }
-        /* Modal styles */
+        /* Modal styles for full-screen image view */
         .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
@@ -77,6 +82,10 @@
             text-decoration: none;
             cursor: pointer;
         }
+        /* Hidden class to toggle visibility of sections */
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="antialiased text-gray-800">
@@ -91,143 +100,104 @@
         </div>
     </div>
 
-    <main class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <!-- Main Project List Page -->
+    <main id="project-list-page" class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <section class="mb-12">
             <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-gradient">My Featured Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                 <!-- Project Card: Self-Serve -->
-                <div class="project-card p-6">
+                <div class="project-card p-6" onclick="showProjectDetails('self-serve')">
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">Self-Serve Restaurant App</h3>
                     <p class="text-gray-600 mb-4 flex-grow">
                         Developed a restaurant app allowing users to order food items and seamlessly pay via Stripe integration or physical card reader. Features included printer connection via LAN and Bluetooth, notification system, and Sqflite for local data storage. Implemented native Android and iOS Printer SDK in Flutter.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-sm mb-4">
+                    <div class="flex flex-wrap gap-2 text-sm mb-4 mt-auto">
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Flutter</span>
                         <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">Stripe API</span>
                         <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">Printer SDK (Native)</span>
                         <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium">Sqflite</span>
                     </div>
-                    <div class="gallery mt-auto">
-                        <h4 class="text-lg font-medium mb-3">Gallery</h4>
-                        <div class="grid grid-cols-2 gap-2">
-                            <!--
-                                IMPORTANT: Replace these placeholder image paths with your actual image file names.
-                                Ensure you create an 'images' folder in your GitHub repository and place your images there.
-                                Example: your_repo/images/self-serve-1.jpg
-                            -->
-                            <img src="images/self-serve-1.jpg" alt="Self-Serve App Screenshot 1" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/E0E7FF/4F46E5?text=Self-Serve+1';" onclick="openModal(this.src)">
-                            <img src="images/self-serve-2.jpg" alt="Self-Serve App Screenshot 2" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/C7D2FE/4338CA?text=Self-Serve+2';" onclick="openModal(this.src)">
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Project Card: Online-Ordering Manager -->
-                <div class="project-card p-6">
+                <div class="project-card p-6" onclick="showProjectDetails('online-ordering-manager')">
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">Online-Ordering Manager Backend</h3>
                     <p class="text-gray-600 mb-4 flex-grow">
                         Engineered a backend application designed to efficiently manage incoming orders from a restaurant app. This project focused on optimizing workflow and enhancing operational efficiency for seamless order processing.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-sm mb-4">
+                    <div class="flex flex-wrap gap-2 text-sm mb-4 mt-auto">
                         <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-medium">Backend Development</span>
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Order Management</span>
-                        <!-- Add more specific backend technologies if known, e.g., Node.js, Express.js, MySQL -->
-                    </div>
-                    <div class="gallery mt-auto">
-                        <h4 class="text-lg font-medium mb-3">Gallery</h4>
-                        <div class="grid grid-cols-2 gap-2">
-                             <!--
-                                IMPORTANT: Replace these placeholder image paths with your actual image file names.
-                                Ensure you create an 'images' folder in your GitHub repository and place your images there.
-                                Example: your_repo/images/manager-1.jpg
-                            -->
-                            <img src="images/manager-1.jpg" alt="Online-Ordering Manager Screenshot 1" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FFFBEB/B45309?text=Manager+1';" onclick="openModal(this.src)">
-                            <img src="images/manager-2.jpg" alt="Online-Ordering Manager Screenshot 2" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FEF3C7/92400E?text=Manager+2';" onclick="openModal(this.src)">
-                        </div>
                     </div>
                 </div>
 
                 <!-- Project Card: Click me Cursive -->
-                <div class="project-card p-6">
+                <div class="project-card p-6" onclick="showProjectDetails('click-me-cursive')">
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">Click me Cursive Children's App</h3>
                     <p class="text-gray-600 mb-4 flex-grow">
                         Developed an interactive children's app for alphabet learning with drawing features. Integrated microphone for pronunciation practice and voice-activated navigation to enhance the learning experience.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-sm mb-4">
+                    <div class="flex flex-wrap gap-2 text-sm mb-4 mt-auto">
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Flutter</span>
                         <span class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-medium">Educational App</span>
                         <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full font-medium">Voice Recognition</span>
                         <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-medium">Interactive UI</span>
                     </div>
-                    <div class="gallery mt-auto">
-                        <h4 class="text-lg font-medium mb-3">Gallery</h4>
-                        <div class="grid grid-cols-2 gap-2">
-                            <!--
-                                IMPORTANT: Replace these placeholder image paths with your actual image file names.
-                                Ensure you create an 'images' folder in your GitHub repository and place your images there.
-                                Example: your_repo/images/cursive-1.jpg
-                            -->
-                            <img src="images/cursive-1.jpg" alt="Click me Cursive App Screenshot 1" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FCE7F3/BE185D?text=Cursive+1';" onclick="openModal(this.src)">
-                            <img src="images/cursive-2.jpg" alt="Click me Cursive App Screenshot 2" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FBCFE8/9D174D?text=Cursive+2';" onclick="openModal(this.src)">
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Project Card: IHealthCure -->
-                <div class="project-card p-6">
+                <div class="project-card p-6" onclick="showProjectDetails('ihealthcure')">
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">IHealthCure Healthcare App</h3>
                     <p class="text-gray-600 mb-4 flex-grow">
                         A comprehensive healthcare app for appointment booking, including a rider role for blood sample collection. Supports online payments and integrates with physical health monitoring devices (blood pressure, glucose levels) for real-time vital parameter measurement.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-sm mb-4">
+                    <div class="flex flex-wrap gap-2 text-sm mb-4 mt-auto">
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Flutter</span>
                         <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full font-medium">Healthcare</span>
                         <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">Payment Integration</span>
                         <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">Device Integration</span>
                     </div>
                     <p class="text-xs text-gray-500 mt-2">Dates: August 2023 - December 2023</p>
-                    <div class="gallery mt-auto">
-                        <h4 class="text-lg font-medium mb-3">Gallery</h4>
-                        <div class="grid grid-cols-2 gap-2">
-                            <!--
-                                IMPORTANT: Replace these placeholder image paths with your actual image file names.
-                                Ensure you create an 'images' folder in your GitHub repository and place your images there.
-                                Example: your_repo/images/healthcure-1.jpg
-                            -->
-                            <img src="images/healthcure-1.jpg" alt="IHealthCure App Screenshot 1" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FFEFD5/CD7F32?text=HealthCure+1';" onclick="openModal(this.src)">
-                            <img src="images/healthcure-2.jpg" alt="IHealthCure App Screenshot 2" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FFE4B5/8B4513?text=HealthCure+2';" onclick="openModal(this.src)">
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Project Card: Medico App -->
-                <div class="project-card p-6">
+                <div class="project-card p-6" onclick="showProjectDetails('medico-app')">
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">Medico App (File Manager & Admin)</h3>
                     <p class="text-gray-600 mb-4 flex-grow">
                         A file manager app facilitating easy uploads, downloads, and offline access to files. It also features an integrated admin panel for managing posts, polls, and notifications, providing a comprehensive content management solution.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-sm mb-4">
+                    <div class="flex flex-wrap gap-2 text-sm mb-4 mt-auto">
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">File Management</span>
                         <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full font-medium">Admin Panel</span>
                         <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium">Content Management</span>
-                    </div>
-                    <div class="gallery mt-auto">
-                        <h4 class="text-lg font-medium mb-3">Gallery</h4>
-                        <div class="grid grid-cols-2 gap-2">
-                            <!--
-                                IMPORTANT: Replace these placeholder image paths with your actual image file names.
-                                Ensure you create an 'images' folder in your GitHub repository and place your images there.
-                                Example: your_repo/images/medico-1.jpg
-                            -->
-                            <img src="images/medico-1.jpg" alt="Medico App Screenshot 1" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/D1FAE5/065F46?text=Medico+1';" onclick="openModal(this.src)">
-                            <img src="images/medico-2.jpg" alt="Medico App Screenshot 2" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/A7F3D0/047857?text=Medico+2';" onclick="openModal(this.src)">
-                        </div>
                     </div>
                 </div>
 
             </div>
         </section>
     </main>
+
+    <!-- Project Detail Page (Initially Hidden) -->
+    <section id="project-detail-page" class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8 hidden">
+        <button onclick="showProjectList()" class="mb-8 flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-200 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            Back to Projects
+        </button>
+
+        <h2 id="detail-project-title" class="text-3xl sm:text-4xl font-bold mb-4 text-gradient"></h2>
+        <p id="detail-project-description" class="text-lg text-gray-700 mb-6"></p>
+        <div id="detail-project-tech" class="flex flex-wrap gap-2 text-sm mb-8"></div>
+        <p id="detail-project-dates" class="text-sm text-gray-500 mb-8"></p>
+
+
+        <h3 class="text-2xl font-semibold mb-5 text-gray-800">Project Screenshots</h3>
+        <div id="detail-project-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Images will be dynamically loaded here -->
+        </div>
+    </section>
 
     <footer class="bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8 mt-12 rounded-t-3xl">
         <div class="max-w-4xl mx-auto text-center">
@@ -244,28 +214,204 @@
     </footer>
 
     <!-- Image Modal -->
-    <div id="imageModal" class="modal">
-        <span class="close-button" onclick="closeModal()">&times;</span>
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-button">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
 
     <script>
-        // Function to open the modal with the clicked image
+        // Define project data with more images for demonstration
+        const projectsData = [
+            {
+                id: 'self-serve',
+                title: 'Self-Serve Restaurant App',
+                description: 'Developed a restaurant app allowing users to order food items and seamlessly pay via Stripe integration or physical card reader. Features included printer connection via LAN and Bluetooth, notification system, and Sqflite for local data storage. Implemented native Android and iOS Printer SDK in Flutter.',
+                tech: ['Flutter', 'Stripe API', 'Printer SDK (Native)', 'Sqflite'],
+                images: [
+                    'images/self-serve-1.jpg',
+                    'images/self-serve-2.jpg',
+                    'images/self-serve-3.jpg',
+                    'images/self-serve-4.jpg'
+                ],
+                dates: ''
+            },
+            {
+                id: 'online-ordering-manager',
+                title: 'Online-Ordering Manager Backend',
+                description: 'Engineered a backend application designed to efficiently manage incoming orders from a restaurant app. This project focused on optimizing workflow and enhancing operational efficiency for seamless order processing.',
+                tech: ['Backend Development', 'Order Management', 'Node.js', 'Express.js', 'MySQL'], // Added more backend tech for example
+                images: [
+                    'images/manager-1.jpg',
+                    'images/manager-2.jpg',
+                    'images/manager-3.jpg'
+                ],
+                dates: ''
+            },
+            {
+                id: 'click-me-cursive',
+                title: 'Click me Cursive Children\'s App',
+                description: 'Developed an interactive children\'s app for alphabet learning with drawing features. Integrated microphone for pronunciation practice and voice-activated navigation to enhance the learning experience.',
+                tech: ['Flutter', 'Educational App', 'Voice Recognition', 'Interactive UI'],
+                images: [
+                    'images/cursive-1.jpg',
+                    'images/cursive-2.jpg'
+                ],
+                dates: ''
+            },
+            {
+                id: 'ihealthcure',
+                title: 'IHealthCure Healthcare App',
+                description: 'A comprehensive healthcare app for appointment booking, including a rider role for blood sample collection. Supports online payments and integrates with physical health monitoring devices (blood pressure, glucose levels) for real-time vital parameter measurement.',
+                tech: ['Flutter', 'Healthcare', 'Payment Integration', 'Device Integration'],
+                images: [
+                    'images/healthcure-1.jpg',
+                    'images/healthcure-2.jpg',
+                    'images/healthcure-3.jpg',
+                    'images/healthcure-4.jpg',
+                    'images/healthcure-5.jpg'
+                ],
+                dates: 'August 2023 - December 2023'
+            },
+            {
+                id: 'medico-app',
+                title: 'Medico App (File Manager & Admin)',
+                description: 'A file manager app facilitating easy uploads, downloads, and offline access to files. It also features an integrated admin panel for managing posts, polls, and notifications, providing a comprehensive content management solution.',
+                tech: ['File Management', 'Admin Panel', 'Content Management', 'Flutter', 'Firebase'], // Added more tech
+                images: [
+                    'images/medico-1.jpg',
+                    'images/medico-2.jpg',
+                    'images/medico-3.jpg'
+                ],
+                dates: ''
+            }
+        ];
+
+        // Get page elements
+        const projectListPage = document.getElementById('project-list-page');
+        const projectDetailPage = document.getElementById('project-detail-page');
+
+        const detailProjectTitle = document.getElementById('detail-project-title');
+        const detailProjectDescription = document.getElementById('detail-project-description');
+        const detailProjectTech = document.getElementById('detail-project-tech');
+        const detailProjectDates = document.getElementById('detail-project-dates');
+        const detailProjectGallery = document.getElementById('detail-project-gallery');
+
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+
+        /**
+         * Shows the main project list page and hides the project detail page.
+         */
+        function showProjectList() {
+            projectListPage.classList.remove('hidden');
+            projectDetailPage.classList.add('hidden');
+            window.scrollTo(0, 0); // Scroll to top when navigating back
+        }
+
+        /**
+         * Displays the details and gallery for a specific project.
+         * @param {string} projectId - The ID of the project to display.
+         */
+        function showProjectDetails(projectId) {
+            const project = projectsData.find(p => p.id === projectId);
+
+            if (!project) {
+                console.error('Project not found:', projectId);
+                return;
+            }
+
+            // Populate project details
+            detailProjectTitle.textContent = project.title;
+            detailProjectDescription.textContent = project.description;
+            detailProjectDates.textContent = project.dates ? `Dates: ${project.dates}` : '';
+
+            // Populate technologies
+            detailProjectTech.innerHTML = ''; // Clear previous tech
+            project.tech.forEach(tech => {
+                const span = document.createElement('span');
+                // Dynamically assign background color based on technology for better visual variety
+                let bgColorClass = 'bg-gray-100';
+                let textColorClass = 'text-gray-700';
+
+                if (tech.includes('Flutter')) {
+                    bgColorClass = 'bg-blue-100';
+                    textColorClass = 'text-blue-700';
+                } else if (tech.includes('API')) {
+                    bgColorClass = 'bg-green-100';
+                    textColorClass = 'text-green-700';
+                } else if (tech.includes('Backend')) {
+                    bgColorClass = 'bg-yellow-100';
+                    textColorClass = 'text-yellow-700';
+                } else if (tech.includes('Educational') || tech.includes('UI')) {
+                    bgColorClass = 'bg-pink-100';
+                    textColorClass = 'text-pink-700';
+                } else if (tech.includes('Healthcare')) {
+                    bgColorClass = 'bg-red-100';
+                    textColorClass = 'text-red-700';
+                } else if (tech.includes('Management')) {
+                    bgColorClass = 'bg-purple-100';
+                    textColorClass = 'text-purple-700';
+                } else if (tech.includes('Firebase')) {
+                    bgColorClass = 'bg-orange-100';
+                    textColorClass = 'text-orange-700';
+                }
+
+
+                span.className = `${bgColorClass} ${textColorClass} px-3 py-1 rounded-full font-medium`;
+                span.textContent = tech;
+                detailProjectTech.appendChild(span);
+            });
+
+
+            // Populate gallery images
+            detailProjectGallery.innerHTML = ''; // Clear previous images
+            project.images.forEach(imagePath => {
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'gallery-item shadow-md hover:shadow-lg'; // Added shadow for attractiveness
+
+                const img = document.createElement('img');
+                img.src = imagePath;
+                img.alt = `Screenshot for ${project.title}`;
+                img.className = 'w-full h-auto object-cover rounded-md'; // Ensure responsiveness and rounded corners
+                img.setAttribute('loading', 'lazy'); // Lazy load images for performance
+
+                // Add onerror fallback for images
+                img.onerror = function() {
+                    this.onerror = null; // Prevent infinite loop if fallback also fails
+                    // Use a generic placeholder if the specific image is not found
+                    this.src = `https://placehold.co/400x300/CCCCCC/333333?text=Image+Not+Found`;
+                };
+
+                img.onclick = () => openModal(imagePath); // Open modal on click
+
+                imgContainer.appendChild(img);
+                detailProjectGallery.appendChild(imgContainer);
+            });
+
+            // Show project detail page and hide project list
+            projectListPage.classList.add('hidden');
+            projectDetailPage.classList.remove('hidden');
+            window.scrollTo(0, 0); // Scroll to top when navigating to detail page
+        }
+
+        /**
+         * Opens the modal with the clicked image.
+         * @param {string} src - The source URL of the image to display in the modal.
+         */
         function openModal(src) {
-            const modal = document.getElementById("imageModal");
-            const modalImage = document.getElementById("modalImage");
-            modal.style.display = "flex"; // Use flex to center content
             modalImage.src = src;
+            imageModal.style.display = "flex"; // Use flex to center content
         }
 
-        // Function to close the modal
+        /**
+         * Closes the image modal.
+         */
         function closeModal() {
-            const modal = document.getElementById("imageModal");
-            modal.style.display = "none";
+            imageModal.style.display = "none";
         }
 
-        // Close the modal if clicked outside the image
-        document.getElementById("imageModal").addEventListener('click', function(event) {
+        // Close the modal if clicked outside the image content
+        imageModal.addEventListener('click', function(event) {
             if (event.target === this) {
                 closeModal();
             }
