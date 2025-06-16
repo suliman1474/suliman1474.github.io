@@ -16,6 +16,8 @@
             border-radius: 12px; /* More rounded corners */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Soft shadow */
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex; /* Use flexbox for consistent height */
+            flex-direction: column;
         }
         .project-card:hover {
             transform: translateY(-5px);
@@ -28,6 +30,52 @@
             background: linear-gradient(45deg, #6366f1, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+        .gallery-item {
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -49,71 +97,131 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                 <!-- Project Card: Self-Serve -->
-                <div class="project-card p-6 flex flex-col">
+                <div class="project-card p-6">
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">Self-Serve Restaurant App</h3>
                     <p class="text-gray-600 mb-4 flex-grow">
                         Developed a restaurant app allowing users to order food items and seamlessly pay via Stripe integration or physical card reader. Features included printer connection via LAN and Bluetooth, notification system, and Sqflite for local data storage. Implemented native Android and iOS Printer SDK in Flutter.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-sm">
+                    <div class="flex flex-wrap gap-2 text-sm mb-4">
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Flutter</span>
                         <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">Stripe API</span>
                         <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">Printer SDK (Native)</span>
                         <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium">Sqflite</span>
                     </div>
+                    <div class="gallery mt-auto">
+                        <h4 class="text-lg font-medium mb-3">Gallery</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            <!--
+                                IMPORTANT: Replace these placeholder image paths with your actual image file names.
+                                Ensure you create an 'images' folder in your GitHub repository and place your images there.
+                                Example: your_repo/images/self-serve-1.jpg
+                            -->
+                            <img src="images/self-serve-1.jpg" alt="Self-Serve App Screenshot 1" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/E0E7FF/4F46E5?text=Self-Serve+1';" onclick="openModal(this.src)">
+                            <img src="images/self-serve-2.jpg" alt="Self-Serve App Screenshot 2" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/C7D2FE/4338CA?text=Self-Serve+2';" onclick="openModal(this.src)">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Project Card: Online-Ordering Manager -->
-                <div class="project-card p-6 flex flex-col">
+                <div class="project-card p-6">
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">Online-Ordering Manager Backend</h3>
                     <p class="text-gray-600 mb-4 flex-grow">
                         Engineered a backend application designed to efficiently manage incoming orders from a restaurant app. This project focused on optimizing workflow and enhancing operational efficiency for seamless order processing.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-sm">
+                    <div class="flex flex-wrap gap-2 text-sm mb-4">
                         <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-medium">Backend Development</span>
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Order Management</span>
                         <!-- Add more specific backend technologies if known, e.g., Node.js, Express.js, MySQL -->
                     </div>
+                    <div class="gallery mt-auto">
+                        <h4 class="text-lg font-medium mb-3">Gallery</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                             <!--
+                                IMPORTANT: Replace these placeholder image paths with your actual image file names.
+                                Ensure you create an 'images' folder in your GitHub repository and place your images there.
+                                Example: your_repo/images/manager-1.jpg
+                            -->
+                            <img src="images/manager-1.jpg" alt="Online-Ordering Manager Screenshot 1" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FFFBEB/B45309?text=Manager+1';" onclick="openModal(this.src)">
+                            <img src="images/manager-2.jpg" alt="Online-Ordering Manager Screenshot 2" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FEF3C7/92400E?text=Manager+2';" onclick="openModal(this.src)">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Project Card: Click me Cursive -->
-                <div class="project-card p-6 flex flex-col">
+                <div class="project-card p-6">
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">Click me Cursive Children's App</h3>
                     <p class="text-gray-600 mb-4 flex-grow">
                         Developed an interactive children's app for alphabet learning with drawing features. Integrated microphone for pronunciation practice and voice-activated navigation to enhance the learning experience.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-sm">
+                    <div class="flex flex-wrap gap-2 text-sm mb-4">
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Flutter</span>
                         <span class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-medium">Educational App</span>
                         <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full font-medium">Voice Recognition</span>
                         <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full font-medium">Interactive UI</span>
                     </div>
+                    <div class="gallery mt-auto">
+                        <h4 class="text-lg font-medium mb-3">Gallery</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            <!--
+                                IMPORTANT: Replace these placeholder image paths with your actual image file names.
+                                Ensure you create an 'images' folder in your GitHub repository and place your images there.
+                                Example: your_repo/images/cursive-1.jpg
+                            -->
+                            <img src="images/cursive-1.jpg" alt="Click me Cursive App Screenshot 1" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FCE7F3/BE185D?text=Cursive+1';" onclick="openModal(this.src)">
+                            <img src="images/cursive-2.jpg" alt="Click me Cursive App Screenshot 2" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FBCFE8/9D174D?text=Cursive+2';" onclick="openModal(this.src)">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Project Card: IHealthCure -->
-                <div class="project-card p-6 flex flex-col">
+                <div class="project-card p-6">
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">IHealthCure Healthcare App</h3>
                     <p class="text-gray-600 mb-4 flex-grow">
                         A comprehensive healthcare app for appointment booking, including a rider role for blood sample collection. Supports online payments and integrates with physical health monitoring devices (blood pressure, glucose levels) for real-time vital parameter measurement.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-sm">
+                    <div class="flex flex-wrap gap-2 text-sm mb-4">
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">Flutter</span>
                         <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full font-medium">Healthcare</span>
                         <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">Payment Integration</span>
                         <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">Device Integration</span>
                     </div>
                     <p class="text-xs text-gray-500 mt-2">Dates: August 2023 - December 2023</p>
+                    <div class="gallery mt-auto">
+                        <h4 class="text-lg font-medium mb-3">Gallery</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            <!--
+                                IMPORTANT: Replace these placeholder image paths with your actual image file names.
+                                Ensure you create an 'images' folder in your GitHub repository and place your images there.
+                                Example: your_repo/images/healthcure-1.jpg
+                            -->
+                            <img src="images/healthcure-1.jpg" alt="IHealthCure App Screenshot 1" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FFEFD5/CD7F32?text=HealthCure+1';" onclick="openModal(this.src)">
+                            <img src="images/healthcure-2.jpg" alt="IHealthCure App Screenshot 2" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/FFE4B5/8B4513?text=HealthCure+2';" onclick="openModal(this.src)">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Project Card: Medico App -->
-                <div class="project-card p-6 flex flex-col">
+                <div class="project-card p-6">
                     <h3 class="text-xl font-semibold mb-3 text-gray-900">Medico App (File Manager & Admin)</h3>
                     <p class="text-gray-600 mb-4 flex-grow">
                         A file manager app facilitating easy uploads, downloads, and offline access to files. It also features an integrated admin panel for managing posts, polls, and notifications, providing a comprehensive content management solution.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-sm">
+                    <div class="flex flex-wrap gap-2 text-sm mb-4">
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">File Management</span>
                         <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full font-medium">Admin Panel</span>
                         <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium">Content Management</span>
+                    </div>
+                    <div class="gallery mt-auto">
+                        <h4 class="text-lg font-medium mb-3">Gallery</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            <!--
+                                IMPORTANT: Replace these placeholder image paths with your actual image file names.
+                                Ensure you create an 'images' folder in your GitHub repository and place your images there.
+                                Example: your_repo/images/medico-1.jpg
+                            -->
+                            <img src="images/medico-1.jpg" alt="Medico App Screenshot 1" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/D1FAE5/065F46?text=Medico+1';" onclick="openModal(this.src)">
+                            <img src="images/medico-2.jpg" alt="Medico App Screenshot 2" class="w-full h-auto object-cover rounded-md gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/200x150/A7F3D0/047857?text=Medico+2';" onclick="openModal(this.src)">
+                        </div>
                     </div>
                 </div>
 
@@ -134,5 +242,34 @@
             </p>
         </div>
     </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // Function to open the modal with the clicked image
+        function openModal(src) {
+            const modal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
+            modal.style.display = "flex"; // Use flex to center content
+            modalImage.src = src;
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            const modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
+
+        // Close the modal if clicked outside the image
+        document.getElementById("imageModal").addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
